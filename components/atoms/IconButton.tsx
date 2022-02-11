@@ -1,25 +1,18 @@
-import {
-  TouchableOpacity,
-  GestureResponderEvent
-} from 'react-native'
-import React, { VFC } from 'react'
-import tw from 'tailwind-rn'
+
+import React, { VFC } from 'react';
+import tw from 'tailwind-rn';
+import { TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-// nameの部分をtitleに変更
 type Props = {
-  title: string,
-  size: number,
-  color: string,
-  onPress: (e: GestureResponderEvent) => void,
-}
+  name: any;
+  color: string;
+  size: number;
+  onPress: (e: GestureResponderEvent) => void;
+};
 
-export const IconButton: VFC<Props> = (props) => {
-  const { title, size, color, onPress } = props;
-
-  return (
-    <TouchableOpacity onPress={onPress} style={tw('items-center')}>
-      <AntDesign title={title} size={size} color={color} />
-    </TouchableOpacity>
-  )
-}
+export const IconButton: VFC<Props> = ({ color, size, onPress, name }) => (
+  <TouchableOpacity style={tw('items-center')} onPress={onPress}>
+    <AntDesign name={name} size={size} color={color} />
+  </TouchableOpacity>
+)

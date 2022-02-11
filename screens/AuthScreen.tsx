@@ -1,5 +1,5 @@
 import React, { VFC } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import tw from 'tailwind-rn'
 import { FontAwesome } from '@expo/vector-icons'
 import { useFirebaseAuth } from '../hooks/useFirebaseAuth';
@@ -23,17 +23,14 @@ export const AuthScreen: VFC = () => {
   } = useFirebaseAuth();
 
   return (
-    <View style={[tw('flex-1 pt-16 items-center'), { backgroundColor: "#008b8b" }]}>
+    <SafeAreaView style={[tw('flex-1 pt-16 items-center'), { backgroundColor: "#008b8b" }]}>
       <FontAwesome name="tasks" size={50} color="white" />
       <Text style={tw('text-2xl text-white mt-2 mb-5 font-semibold')}>
         {isLogin ? 'Login' : 'SignUp'}
       </Text>
       <InputField
         leftIcon="email"
-        iconColor={''}
         placeholder="enter Email"
-        placeholderTextColor={''}
-        secureTextEntry={undefined}
         keyboardType={'email-address'}
         textContentType={'password'}
         autoFocus
@@ -44,14 +41,11 @@ export const AuthScreen: VFC = () => {
       />
       <InputField
         leftIcon="lock"
-        iconColor={''}
         placeholder="enter Password"
-        placeholderTextColor={''}
         secureTextEntry
         keyboardType={'email-address'}
         textContentType={'password'}
         value={password}
-        autoFocus={undefined}
         onChangeText={(text: string) => {
           setPassword(text);
         }}
@@ -71,11 +65,11 @@ export const AuthScreen: VFC = () => {
         {isLogin ? 'create new account ?' : 'login ?'}
       </Text>
       <IconButton
-        title={'retweet'}
+        name='retweet'
         size={24}
-        color={'#fff'}
+        color='#fff'
         onPress={toggleMode}
       />
-    </View>
+    </SafeAreaView>
   )
 }

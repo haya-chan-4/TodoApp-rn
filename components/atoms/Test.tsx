@@ -1,24 +1,59 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
-import Constants from 'expo-constants';
+import React, { VFC } from 'react'
+import { View, Text } from 'react-native'
+import tw from 'tailwind-rn'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { TextInput } from 'react-native-gesture-handler'
 
-const firebaseConfig = {
-apiKey: Constants?.manifest?.extra?.apiKey,
-authDomain: Constants?.manifest?.extra?.authDomain,
-projectId: Constants?.manifest?.extra?.projectId,
-storageBucket: Constants?.manifest?.extra?.storageBucket,
-messagingSenderId: Constants?.manifest?.extra?.messagingSenderId,
-appId: Constants?.manifest?.extra?.appId,
-};
-
-let firebaseApp: any;
-
-if (!firebaseApp) {
-  firebaseApp = initializeApp(firebaseConfig);
+type Props = {
+  leftIcon: any,
+  iconColor: string,
+  placeholder: string,
+  placeholderTextColor: string,
+  secureTextEntry: boolean | undefined,
+  keyboardType: "email-address" | "default",
+  textContentType: "emailAddress" | "password" | "name",
+  autoFocus: boolean | undefined,
+  value: string,
+  onChangeText: (value: string) => void,
 }
 
-export const storage = getStorage(firebaseApp);
-export const auth = getAuth(firebaseApp);
-export const db = getFirestore(firebaseApp);
+export const Test: VFC<Props> = (props) => {
+  const {
+    leftIcon,
+    iconColor,
+    placeholder,
+    placeholderTextColor,
+    secureTextEntry,
+    keyboardType,
+    textContentType,
+    autoFocus,
+    value,
+    onChangeText,
+  } = props;
+
+  return (
+    <View style={tw('mb-5 mx-3 flex-row p-3 w-11/12 bg-white rounded')}>
+      {leftIcon ? (
+        <MaterialCommunityIcons
+          name={leftIcon}
+          size={20}
+          color={iconColor}
+          style={tw('mr-3')}
+        />
+      ) : null}
+      <TextInput
+        style={tw('w-full')}
+        onChangeText={onChangeText}
+        value={value}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        textContentType={textContentType}
+        autoCapitalize="none"
+        autoFocus={autoFocus}
+        placeholderTextColor={placeholderTextColor}
+        placeholder={placeholder}
+      />
+    </View>
+  )
+}
+

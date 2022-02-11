@@ -1,37 +1,23 @@
+import { Box, NativeBaseProvider } from "native-base";
 import React from "react";
-import {Provider} from 'react-redux'
-import {store} from './store'
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Code,
-  Box,
-} from "native-base";
-import NativeBaseIcon from "./components/other/NativeBaseIcon";
 
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
+import { Provider } from 'react-redux'
+import { store } from './store'
+import tw from 'tailwind-rn';
+import { LogBox } from "react-native";
+import { RootNavigator } from "./navigations/RootNavigator";
 
-// extend the theme
-export const theme = extendTheme({ config });
+LogBox.ignoreLogs ([
+  'Setting a timer',
+  'AsyncStorage has been extracted from react-native core and will'
+])
+
+
 
 export default function App() {
   return (
     <Provider store={store}>
-      <Box>
-        <Text>text</Text>
-      </Box>
+      <RootNavigator />
     </Provider>
   );
 }
